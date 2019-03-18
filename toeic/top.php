@@ -16,6 +16,8 @@ if (!empty($examination)) {
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Document</title>
         <link rel="stylesheet" type="text/css" href="toeic.css">
+        <link href="https://fonts.googleapis.com/earlyaccess/nicomoji.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Kosugi+Maru" rel="stylesheet">
         </head>
     <body>
         <form action="top.php" method="post">
