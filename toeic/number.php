@@ -1,10 +1,13 @@
 <?php
 
+session_start();
+
 $point = 0;
 $listening_point = 0;
 $reading_point = 0;
 
 $home = $_POST["home"];
+$exam_number = $_SESSION["nums"];
 
 if (!empty($home)) {
     header("location: main.php");
@@ -103,25 +106,15 @@ $total = $total_listening_point + $total_reading_point;
         <link href="https://fonts.googleapis.com/css?family=Kosugi+Maru" rel="stylesheet">
         </head>
     <body>
-        <form action="once.php" method="post">
+        <form action="number.php" method="post">
             <header>
                 <p>TOEIC Simulator</p>
             </header>
             <div class="main">
-                <h3>結果</h3>
+                <h3>試行回数(<?php echo $exam_number; ?>回)結果</h3>
                 <p>合計得点:<?php echo $total ?>点</p>
-                <p>リスニング:<?php echo $total_listening_point; ?>点</p>
-                <p>リーディング:<?php echo $total_reading_point; ?>点</p>
-                <p>各設問正答率</p>
-                <p>リスニング</p>
-                <p>part1(写真描写問題) <?php echo $listening_point1; ?>/6</p>
-                <p>part2(応答問題) <?php echo $listening_point2; ?>/25</p>
-                <p>part3(会話問題) <?php echo $listening_point3; ?>/39</p>
-                <p>part4(説明文問題) <?php echo $listening_point4; ?>/30</p>
-                <p>リーディング</p>
-                <p>part5(短文穴埋め問題) <?php echo $reading_point5; ?>/30</p>
-                <p>part6(長文穴埋め問題) <?php echo $reading_point6; ?>/16</p>
-                <p>part7(長文読解問題) <?php echo $reading_point7; ?>/54</p>
+
+
                 <input type="submit" name="re_exam" value="再受験">
                 <input type="submit" name="home" value="コース選択">
             </div>

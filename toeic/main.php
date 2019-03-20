@@ -1,11 +1,19 @@
 <?php
 
+session_start();
+
 $once = $_POST["start_once"];
 $number = $_POST["start_number"];
 $target = $_POST["start_target"];
+$_SESSION["nums"] = $_POST["exam_number"];
 
 if (!empty($once)) {
     header("location: once.php");
+    exit();
+}
+
+if (!empty($number) && !empty($_POST["exam_number"])){
+    header("location: number.php");
     exit();
 }
 
