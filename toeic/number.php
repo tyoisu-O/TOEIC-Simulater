@@ -2,12 +2,10 @@
 
 session_start();
 
-$point = 0;
-$listening_point = 0;
-$reading_point = 0;
-
 $home = $_POST["home"];
 $exam_number = $_SESSION["nums"];
+
+$exam_scores = [];
 
 if (!empty($home)) {
     header("location: main.php");
@@ -25,36 +23,6 @@ function question($num,$choice){
     return $point;
 }
 
-//リスニングpart1(写真描写問題) 6問 4択
-$listening_point1 = question(6,4);
-$listening_point = $listening_point + $listening_point1;
-
-//リスニングpart2(応答問題) 25問 3択
-$listening_point2 = question(25,3);
-$listening_point = $listening_point + $listening_point2;
-
-//リスニングpart3(会話問題) 39問 4択
-$listening_point3 = question(39,4);
-$listening_point = $listening_point + $listening_point3;
-
-//リスニングpart4(説明文問題) 30問 4択
-$listening_point4 = question(30,4);
-$listening_point = $listening_point + $listening_point4;
-
-
-//リーディングpart5(短文穴埋め問題) 30問 4択
-$reading_point5 = question(30,4);
-$reading_point = $reading_point + $reading_point5;
-
-//リーディングpart6(長文穴埋め問題) 16問 4択
-$reading_point6 = question(16,4);
-$reading_point = $reading_point + $reading_point6;
-
-//リーディングpart7(長文読解問題) 54問 4択
-$reading_point7 = question(54,4);
-$reading_point = $reading_point + $reading_point7;
-
-
 
 //スコアレンジ
 $listening_score = [5, rand(5, 20), rand(15, 40), rand(20, 55), rand(35, 70), rand(50, 90), rand(70, 105), rand(85, 130),
@@ -66,26 +34,59 @@ rand(100, 140), rand(120, 170), rand(150, 195), rand(175, 225), rand(205, 255), 
 rand(355, 400), rand(380, 430), rand(410, 475), rand(460, 495)];
 
 
-for($i = 0; $i <= 4; $i++){
-    if(($listening_point + $i) % 5 == 0){
-        $listening_point = $listening_point + $i;
-        break;
+
+for($i = 1; $i <= $exam_number; $i++) {
+
+    $listening_point = 0;
+    $reading_point = 0;
+    $total_listening_point = 0;
+    $total_reading_point = 0;
+
+    //リスニングpart1(写真描写問題) 6問 4択
+    $listening_point = $listening_point + question(6,4);
+
+    //リスニングpart2(応答問題) 25問 3択
+    $listening_point = $listening_point + question(25,3);
+
+    //リスニングpart3(会話問題) 39問 4択
+    $listening_point = $listening_point + question(39,4);
+
+    //リスニングpart4(説明文問題) 30問 4択
+    $listening_point = $listening_point + question(30,4);
+
+
+    //リーディングpart5(短文穴埋め問題) 30問 4択
+    $reading_point = $reading_point + question(30,4);
+    //リーディングpart6(長文穴埋め問題) 16問 4択
+    $reading_point = $reading_point + question(16,4);
+    //リーディングpart7(長文読解問題) 54問 4択
+    $reading_point = $reading_point + question(54,4);
+
+
+    for($i = 0; $i <= 4; $i++){
+        if(($listening_point + $i) % 5 == 0){
+            $listening_point = $listening_point + $i;
+            break;
+        }
     }
-}
-$listening_list_num = $listening_point / 5;
+    $listening_list_num = $listening_point / 5;
 
-for($i = 0; $i <= 4; $i++){
-    if(($reading_point + $i) % 5 == 0){
-        $reading_point = $reading_point + $i;
-        break;
+    for($i = 0; $i <= 4; $i++){
+        if(($reading_point + $i) % 5 == 0){
+            $reading_point = $reading_point + $i;
+            break;
+        }
     }
+    $reading_list_num = $reading_point / 5;
+
+
+    $total_listening_point = $listening_score[$listening_list_num];
+    $total_reading_point = $reading_score[$reading_list_num];
+    $exam_scores[] = $total_listening_point + $total_reading_point;
+    var_dump($exam_scores);
 }
-$reading_list_num = $reading_point / 5;
 
 
-$total_listening_point = $listening_score[$listening_list_num];
-$total_reading_point = $reading_score[$reading_list_num];
-$total = $total_listening_point + $total_reading_point;
 
 ?>
 
@@ -112,9 +113,9 @@ $total = $total_listening_point + $total_reading_point;
             </header>
             <div class="main">
                 <h3>試行回数(<?php echo $exam_number; ?>回)結果</h3>
-                <p>合計得点:<?php echo $total ?>点</p>
-
-
+                <?php foreach($exam_scores as $exam_num => $exam_score) : ?>
+                    <p><?php echo $exam_num + 1 ?>回目：<?php echo $exam_score ?>点</p>
+                <?php endforeach ?>
                 <input type="submit" name="re_exam" value="再受験">
                 <input type="submit" name="home" value="コース選択">
             </div>
