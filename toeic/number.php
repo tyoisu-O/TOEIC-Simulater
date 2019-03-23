@@ -63,17 +63,17 @@ for($i = 1; $i <= $exam_number; $i++) {
     $reading_point = $reading_point + question(54,4);
 
 
-    for($i = 0; $i <= 4; $i++){
-        if(($listening_point + $i) % 5 == 0){
-            $listening_point = $listening_point + $i;
+    for($j = 0; $j <= 4; $j++){
+        if(($listening_point + $j) % 5 == 0){
+            $listening_point = $listening_point + $j;
             break;
         }
     }
     $listening_list_num = $listening_point / 5;
 
-    for($i = 0; $i <= 4; $i++){
-        if(($reading_point + $i) % 5 == 0){
-            $reading_point = $reading_point + $i;
+    for($j = 0; $j <= 4; $j++){
+        if(($reading_point + $j) % 5 == 0){
+            $reading_point = $reading_point + $j;
             break;
         }
     }
@@ -82,11 +82,9 @@ for($i = 1; $i <= $exam_number; $i++) {
 
     $total_listening_point = $listening_score[$listening_list_num];
     $total_reading_point = $reading_score[$reading_list_num];
-    $exam_scores[] = $total_listening_point + $total_reading_point;
-    var_dump($exam_scores);
+    $total_point = $total_listening_point + $total_reading_point;
+    $exam_scores[] = $total_point;
 }
-
-
 
 ?>
 
