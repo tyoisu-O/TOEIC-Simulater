@@ -3,9 +3,9 @@
 session_start();
 
 $home = $_POST["home"];
-$exam_number = $_SESSION["nums"];
+$target_point = $_SESSION["point"];
 
-$exam_scores = [];
+$exam_count = 0;
 
 if (!empty($home)) {
     header("location: main.php");
@@ -35,7 +35,7 @@ rand(355, 400), rand(380, 430), rand(410, 475), rand(460, 495)];
 
 
 
-for($i = 1; $i <= $exam_number; $i++) {
+while($target_point > $max_score) {
 
     $listening_point = 0;
     $reading_point = 0;
@@ -83,12 +83,18 @@ for($i = 1; $i <= $exam_number; $i++) {
     $total_listening_point = $listening_score[$listening_list_num];
     $total_reading_point = $reading_score[$reading_list_num];
     $total_point = $total_listening_point + $total_reading_point;
-    $exam_scores[] = $total_point;
 
+    if($total_point >$max_score){
+        $max_score = $total_point;
+    }
+
+    $exam_count++;
+
+    if($exam_count >= 100000){
+
+        break;
+    }
 }
-
-$max_score = max($exam_scores);
-$min_score = min($exam_scores);
 
 ?>
 
@@ -109,25 +115,19 @@ $min_score = min($exam_scores);
         <link href="https://fonts.googleapis.com/css?family=Kosugi+Maru" rel="stylesheet">
         </head>
     <body>
-        <form action="number.php" method="post">
+        <form action="target.php" method="post">
             <a href="top.php">
                 <header>
                     <p>TOEIC Simulator</p>
                 </header>
             </a>
             <div class="main">
-                <h3>試行回数(<?php echo $exam_number; ?>回)結果</h3>
-                <p>最高点:<?php echo $max_score; ?>点</p>
-                <p>最低点:<?php echo $min_score; ?>点</p>
-                <div class="detail">
-                    <label for="label1">全試験の結果表示</label>
-                    <input type="checkbox" id="label1">
-                    <div class="hidden_detail">
-                        <?php foreach($exam_scores as $exam_num => $exam_score) : ?>
-                            <p><?php echo $exam_num + 1 ?>回目：<?php echo $exam_score ?>点</p>
-                        <?php endforeach ?>
-                    </div>
-                </div>
+                <h3>目標点:<?php echo $target_point; ?>点</h3>
+                <?php if($exam_count < 100000): ?>
+                <p>受験回数<?php echo $exam_count; ?>回目で目標点達成!!</p>
+                <?php else: ?>
+                <p>100000回受験してもダメでした(泣)</p>
+                <?php endif ?>
                 
                 <input type="submit" name="re_exam" value="再受験">
                 <input type="submit" name="home" value="コース選択">

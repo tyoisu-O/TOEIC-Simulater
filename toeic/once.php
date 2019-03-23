@@ -104,9 +104,11 @@ $total = $total_listening_point + $total_reading_point;
         </head>
     <body>
         <form action="once.php" method="post">
-            <header>
-                <p>TOEIC Simulator</p>
-            </header>
+            <a href="top.php">
+                <header>
+                    <p>TOEIC Simulator</p>
+                </header>
+            </a>
             <div class="main">
                 <h3>結果</h3>
                 <p>合計得点:<?php echo $total ?>点</p>
@@ -124,6 +126,9 @@ $total = $total_listening_point + $total_reading_point;
                 <p>part7(長文読解問題) <?php echo $reading_point7; ?>/54</p>
                 <input type="submit" name="re_exam" value="再受験">
                 <input type="submit" name="home" value="コース選択">
+                <div class="koukoku">
+                    <P>空きスペース</P>
+                </div>
             </div>
             <footer>
                 <p>© 2019  TOEIC Simulator</p>

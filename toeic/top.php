@@ -21,14 +21,23 @@ if (!empty($examination)) {
         </head>
     <body>
         <form action="top.php" method="post">
-            <header>
-                <p>TOEIC Simulator</p>
-            </header>
+            <a href="top.php">
+                <header>
+                    <p>TOEIC Simulator</p>
+                </header>
+            </a>
             <div class="main">
-                <h1>TOEIC シュミレーターとは...</h1>
-                <p>リスニング100問とリーディング100問の計200問で構成されている990点満点の英語でのコミュニケーション力を判定するための世界共通のテストである。<br>
-                TOEICでは、選択問題を採用しているため、全く勉強しなくても良い点数を取ることは可能である。可能性を感じて欲しい。</p>
-                <input type="submit" name="examination" value="受験">
+                <div class="top_main">
+                    <h1>TOEIC シュミレーターとは...</h1>
+                    <br>
+                    <p>リスニング100問とリーディング100問の計200問で構成されている990点満点の英語でのコミュニケーション力を判定するための世界共通のテストである。<br>
+                    TOEICでは、選択問題を採用しているため、全く勉強しなくても良い点数を取ることは可能である。可能性を感じて欲しい。</p>
+                    <br>
+                    <input type="submit" name="examination" value="受験">
+                    <div class="koukoku">
+                        <P>空きスペース</P>
+                    </div>
+                </div>
             </div>
             <footer>
                 <p>© 2019  TOEIC Simulator</p>
