@@ -13,6 +13,7 @@ if (!empty($home)) {
 
 
 function question($num,$choice){
+    $point = 0;
     for($i = 1; $i <= $num; $i++){
         if(rand(1,$choice) == 1){
             $point = $point + 1;
@@ -103,16 +104,31 @@ $total = $total_listening_point + $total_reading_point;
         </head>
     <body>
         <form action="once.php" method="post">
-            <header>
-                <p>TOEIC Simulator</p>
-            </header>
+            <a href="top.php">
+                <header>
+                    <p>TOEIC Simulator</p>
+                </header>
+            </a>
             <div class="main">
                 <h3>結果</h3>
                 <p>合計得点:<?php echo $total ?>点</p>
                 <p>リスニング:<?php echo $total_listening_point; ?>点</p>
                 <p>リーディング:<?php echo $total_reading_point; ?>点</p>
+                <p>各設問正答率</p>
+                <p>リスニング</p>
+                <p>part1(写真描写問題) <?php echo $listening_point1; ?>/6</p>
+                <p>part2(応答問題) <?php echo $listening_point2; ?>/25</p>
+                <p>part3(会話問題) <?php echo $listening_point3; ?>/39</p>
+                <p>part4(説明文問題) <?php echo $listening_point4; ?>/30</p>
+                <p>リーディング</p>
+                <p>part5(短文穴埋め問題) <?php echo $reading_point5; ?>/30</p>
+                <p>part6(長文穴埋め問題) <?php echo $reading_point6; ?>/16</p>
+                <p>part7(長文読解問題) <?php echo $reading_point7; ?>/54</p>
                 <input type="submit" name="re_exam" value="再受験">
                 <input type="submit" name="home" value="コース選択">
+                <div class="koukoku">
+                    <P>空きスペース</P>
+                </div>
             </div>
             <footer>
                 <p>© 2019  TOEIC Simulator</p>

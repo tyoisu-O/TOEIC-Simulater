@@ -1,11 +1,25 @@
 <?php
 
+session_start();
+
 $once = $_POST["start_once"];
 $number = $_POST["start_number"];
 $target = $_POST["start_target"];
+$_SESSION["nums"] = $_POST["exam_number"];
+$_SESSION["point"] = $_POST["exam_target"];
 
 if (!empty($once)) {
     header("location: once.php");
+    exit();
+}
+
+if (!empty($number) && !empty($_POST["exam_number"])){
+    header("location: number.php");
+    exit();
+}
+
+if (!empty($target) && !empty($_POST["exam_target"])){
+    header("location: target.php");
     exit();
 }
 
@@ -24,9 +38,11 @@ if (!empty($once)) {
 </head>
 <body>
     <form action="main.php" method="post">
-        <header>
-            <p>TOEIC Simulator</p>
-        </header>
+        <a href="top.php">
+            <header>
+                <p>TOEIC Simulator</p>
+            </header>
+        </a>
         <div class="main">
             <div class="once">
                 <h2>一回受験</h2>
@@ -35,7 +51,7 @@ if (!empty($once)) {
             </div>
             <div class="number">
                 <h2>受験回数指定</h2>
-                <p>何回も試験を受けたい人におすすめなコース。試行した全てのテストの中から最高点と最低点がわかります。</p>
+                <p>何回も試験を受けたい人におすすめなコース。試行した全ての試験の中から最高点と最低点がわかります。</p>
                 <input type="text" name="exam_number" placeholder="回数">
                 <input type="submit" name=start_number value="開始">
             </div>
@@ -44,6 +60,13 @@ if (!empty($once)) {
                 <p>TOEICで獲得したい得点がわかっている人に向いているコース。その点数をたたき出す為に必要な受講回数がわかります。</p>
                 <input type="text" name="exam_target" placeholder="10〜990(点数)">
                 <input type="submit" name="start_target" value="開始">
+            </div>
+            <br>
+            <div class="attention">
+                <p>※このTOEICシュミレーターは正確な得点を表示することはできません。TOEIC公式のスコアレンジに基づき、計算をしています。<br>また過度な回数、目標点は処理落ちの原因になりますのでご注意ください。</p>
+            </div>
+            <div class="koukoku">
+                <P>空きスペース</P>
             </div>
         </div>
         <footer>
