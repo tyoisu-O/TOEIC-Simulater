@@ -15,6 +15,10 @@ p{
     margin-top: 10%;
 }
 
+.background{
+    background-color: rgb(242, 242, 242);
+}
+
 input[type="submit"]{
     position: relative;
     display: inline-block;
@@ -62,8 +66,13 @@ footer{
     font-family: 'Kosugi Maru', sans-serif;
 }
 
-.once , .number , .target{
-    margin: 50px 0px;
+.exam_method{
+    display: flex;
+    text-align: center;
+}
+
+.once, .number, .target{
+    margin: 50px 30px;
 }
 
 .detail{
